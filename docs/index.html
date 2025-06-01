@@ -1,0 +1,76 @@
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><digit-spinner> ⌲ Home</title>
+    <link rel="stylesheet" href="css/docs.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto+Mono">
+    <link href="css/prism-okaidia.css" rel="stylesheet" />
+    <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="/node_modules/lit/polyfill-support.js"></script>
+    <script type="module" src="js/digit-spinner.bundled.js"></script>
+  </head>
+  <body>
+    
+<header>
+  <h1>&lt;digit-spinner></h1>
+  <h2>A lightweight web component for odometer-style digit spinners.</h2>
+</header>
+    
+<nav>
+  <a href="">Home</a>
+  <a href="examples/">Examples</a>
+  <a href="playground/">Playground</a>
+  <a href="api/">Documentation</a>
+  <a href="install/">Install</a>
+</nav>
+    <div id="main-wrapper">
+      <main>
+        <h1>&lt;digit-spinner&gt;</h1>
+<p>A smooth, animated odometer-like web component built with Lit. Display numbers with beautiful spinning digit animations that transition seamlessly between values.</p>
+<h2>Basic usage</h2>
+<section class="columns">
+  <div>
+<p><code>&lt;digit-spinner&gt;</code> can be used in plain HTML - just set the <code>value</code> attribute to your desired value.</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>digit-spinner</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>8675309<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>digit-spinner</span><span class="token punctuation">></span></span></code></pre>
+  </div>
+  <div>
+<p><digit-spinner value="8675309"></digit-spinner></p>
+  </div>
+</section>
+<h2>Configure with attributes</h2>
+<section class="columns">
+  <div>
+<p>Set a minimum number of digits to pad with leading zeros using the <code>min-digits</code> attribute. By default, the spinner will display the number of digits necessary to display the value.</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>digit-spinner</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>42<span class="token punctuation">"</span></span> <span class="token attr-name">min-digits</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>digit-spinner</span><span class="token punctuation">></span></span></code></pre>
+  </div>
+  <div>
+<p><digit-spinner value="42" min-digits="4"></digit-spinner></p>
+  </div>
+</section>
+<h2>Easy sizing</h2>
+<section class="columns">
+  <div>
+<p>The entire spinner is based on the font-size of the digit. Adjust <code>--spinner-font-size</code> and the rest will take care of itself!</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css"><br>  <span class="token selector">digit-spinner</span> <span class="token punctuation">{</span><br>    <span class="token property">--spinner-font-size</span><span class="token punctuation">:</span> 2rem<span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>digit-spinner</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>42069<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>digit-spinner</span><span class="token punctuation">></span></span></code></pre>
+  </div>
+  <div>
+<p><digit-spinner value="42069" style="--spinner-font-size: 2rem;"></digit-spinner></p>
+  </div>
+</section>
+
+      </main>
+    </div>
+    
+<footer>
+  <p>
+    Made with
+    <a href="https://github.com/lit/lit-element-starter-ts">lit-starter-ts</a>
+  </p>
+</footer>
+  </body>
+</html>
