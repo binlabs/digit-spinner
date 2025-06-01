@@ -1,0 +1,819 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/digit/digit.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "DEFAULT_DIGITS",
+          "type": {
+            "text": "array"
+          },
+          "default": "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+        },
+        {
+          "kind": "class",
+          "description": "A custom element that displays a single spinning digit. The digit can be\nanimated to a new value. This element is intended for use in digit spinners,\nand is not intended for direct use.",
+          "name": "SpinningDigit",
+          "cssProperties": [
+            {
+              "description": "The background color of the digit",
+              "name": "--digit-background"
+            },
+            {
+              "description": "The border radius of the digit",
+              "name": "--digit-border-radius"
+            },
+            {
+              "description": "The box shadow of the digit",
+              "name": "--digit-box-shadow"
+            },
+            {
+              "description": "The color of the digit",
+              "name": "--digit-color"
+            },
+            {
+              "description": "The font size of the digit, also set by the `--spinner-font-size` custom property",
+              "name": "--digit-font-size"
+            },
+            {
+              "description": "The text shadow of the digit, defaults to none",
+              "name": "--digit-text-shadow"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "The wrapper element for the digits",
+              "name": "digit-wrapper"
+            },
+            {
+              "description": "The digit element",
+              "name": "digit"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The value of the digit. This value is updated immediately, and may not match\nthe displayed value if the digit is animating.",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "Direction"
+              },
+              "default": "'forward'",
+              "description": "The direction of the digit transition.\n\n* If `forward`, the digit value will increase (e.g. from 9 to 0) until the\n  target value is reached.\n* If `backward`, the digit value will decrease (e.g. from 0 to 9) until the\n  target value is reached.\n* If `shortest`, the digit value will take the shortest path\n  (either forward or backward) to the target value.",
+              "attribute": "direction"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "The duration of the digit transition in milliseconds.",
+              "attribute": "duration"
+            },
+            {
+              "kind": "field",
+              "name": "easing",
+              "type": {
+                "text": "string"
+              },
+              "default": "'cubic-bezier(0.83, 0, 0.17, 1)'",
+              "description": "The easing function to use for the digit transition.",
+              "attribute": "easing"
+            },
+            {
+              "kind": "field",
+              "name": "_displayValue",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0",
+              "description": "The digit that is currently displayed. This value changes as the digit flips\nin and out of view."
+            },
+            {
+              "kind": "field",
+              "name": "_pendingSteps",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0",
+              "description": "A counter that tracks the number of steps that have been requested to be\nperformed, but not yet completed."
+            },
+            {
+              "kind": "field",
+              "name": "_lastFrom",
+              "type": {
+                "text": "number | null"
+              },
+              "privacy": "private",
+              "default": "null",
+              "description": "The digit value that the digit is currently animating from."
+            },
+            {
+              "kind": "field",
+              "name": "_lastTo",
+              "type": {
+                "text": "number | null"
+              },
+              "privacy": "private",
+              "default": "null",
+              "description": "The digit value that the digit is currently animating to."
+            },
+            {
+              "kind": "field",
+              "name": "_animationController",
+              "privacy": "private",
+              "default": "new AnimateController(this, {\n    onComplete: () => this._handleAnimationComplete(),\n  })"
+            },
+            {
+              "kind": "method",
+              "name": "_handleAnimationComplete",
+              "privacy": "private",
+              "description": "Handles the completion of an animation. Dispatches a 'digit-flip-end' event\nwith details of the transition, then dequeues the next step if necessary."
+            },
+            {
+              "kind": "method",
+              "name": "_enqueueStep",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_dequeueStep",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Dequeues one step, computes old/new display values, then\ndispatches all the detail-rich events before bumping\n`_displayValue` to fire the actual motion."
+            },
+            {
+              "kind": "method",
+              "name": "_computeStepParams",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              },
+              "parameters": [
+                {
+                  "name": "current",
+                  "type": {
+                    "text": "number"
+                  },
+                  "description": "The current digit position."
+                },
+                {
+                  "name": "target",
+                  "type": {
+                    "text": "number"
+                  },
+                  "description": "The target digit position."
+                },
+                {
+                  "name": "count",
+                  "type": {
+                    "text": "number"
+                  },
+                  "description": "The total number of digits."
+                },
+                {
+                  "name": "mode",
+                  "type": {
+                    "text": "Direction"
+                  },
+                  "description": "The direction mode ('forward', 'backward', 'shortest')."
+                }
+              ],
+              "description": "Computes the direction and distance for the digit step transition."
+            },
+            {
+              "kind": "method",
+              "name": "_dispatchEvent",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "DigitAnimationEventName"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "type": {
+                    "text": "{\n      from: number;\n      to: number;\n      direction?: Exclude<Direction, 'shortest'>;\n    }"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_shift",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "i",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "increment",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "num",
+                  "default": "1",
+                  "description": "Number of digits to increment",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "Increment the digit value by `num`"
+            },
+            {
+              "kind": "method",
+              "name": "decrement",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "num",
+                  "default": "1",
+                  "description": "Number of digits to decrement",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "Decrement the digit value by `num`"
+            }
+          ],
+          "events": [
+            {
+              "description": "Fired when the digit flipping animation begins. The event has the following properties: * `from`: the digit value before the flip * `to`: the digit value after the flip",
+              "name": "digit-flip-start"
+            },
+            {
+              "description": "Fired when the digit flipping animation completes. The event has the following properties: * `from`: the digit value before the flip * `to`: the digit value after the flip",
+              "name": "digit-flip-end"
+            },
+            {
+              "description": "Fired when the digit wraps forward from 9 to 0, or backward from 0 to 9. The event has the following properties: * `from`: the digit value before the wrap * `to`: the digit value after the wrap * `direction`: the direction of the wrap",
+              "name": "digit-wrap"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The value of the digit. This value is updated immediately, and may not match\nthe displayed value if the digit is animating.",
+              "fieldName": "value"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "Direction"
+              },
+              "default": "'forward'",
+              "description": "The direction of the digit transition.\n\n* If `forward`, the digit value will increase (e.g. from 9 to 0) until the\n  target value is reached.\n* If `backward`, the digit value will decrease (e.g. from 0 to 9) until the\n  target value is reached.\n* If `shortest`, the digit value will take the shortest path\n  (either forward or backward) to the target value.",
+              "fieldName": "direction"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "The duration of the digit transition in milliseconds.",
+              "fieldName": "duration"
+            },
+            {
+              "name": "easing",
+              "type": {
+                "text": "string"
+              },
+              "default": "'cubic-bezier(0.83, 0, 0.17, 1)'",
+              "description": "The easing function to use for the digit transition.",
+              "fieldName": "easing"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "spinning-digit",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DEFAULT_DIGITS",
+          "declaration": {
+            "name": "DEFAULT_DIGITS",
+            "module": "src/components/digit/digit.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SpinningDigit",
+          "declaration": {
+            "name": "SpinningDigit",
+            "module": "src/components/digit/digit.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "spinning-digit",
+          "declaration": {
+            "name": "SpinningDigit",
+            "module": "src/components/digit/digit.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/digit/styles.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "styles",
+          "type": {
+            "text": "array"
+          },
+          "default": "[\n  css`\n    :host {\n      --digit-font-size: var(--spinner-font-size, 3rem);\n      align-items: center;\n      background: var(--digit-background, rgba(33, 39, 46, 255));\n      border-radius: var(--digit-border-radius, 0.25rem);\n      box-shadow: var(\n        --digit-box-shadow,\n        0 0.725em 0.1em -0.1em rgba(210, 210, 210, 0.125) inset\n      );\n      color: var(--digit-color, #fff);\n      display: flex;\n      height: var(--digit-font-size);\n      justify-content: center;\n      margin: 0;\n      overflow: hidden;\n      padding: calc(var(--digit-font-size) / 12);\n    }\n\n    .digit-wrapper {\n      align-items: center;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      margin: 0;\n      padding: 0;\n      position: relative;\n      top: calc(-1 * var(--digit-font-size) / 2);\n    }\n\n    .digit {\n      align-items: center;\n      background: transparent;\n      border: none;\n      cursor: pointer;\n      display: flex;\n      font-size: var(--digit-font-size);\n      height: var(--digit-font-size);\n      justify-content: center;\n      margin: 0;\n      padding: 0;\n      text-shadow: var(--digit-text-shadow, none);\n      user-select: none;\n      width: var(--digit-font-size);\n      will-change: transform;\n    }\n  `,\n]"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "styles",
+          "declaration": {
+            "name": "styles",
+            "module": "src/components/digit/styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/spinner/spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A digit spinner web component. Displays a numeric value as a sequence of\nanimated digit elements.",
+          "name": "DigitSpinner",
+          "cssProperties": [
+            {
+              "description": "The background color of the spinner",
+              "name": "--spinner-background"
+            },
+            {
+              "description": "The border color of the spinner",
+              "name": "--spinner-border-color"
+            },
+            {
+              "description": "The border width of the spinner",
+              "name": "--spinner-border-width"
+            },
+            {
+              "description": "The border radius of the spinner",
+              "name": "--spinner-border-radius"
+            },
+            {
+              "description": "The font family of the spinner",
+              "name": "--spinner-font-family"
+            },
+            {
+              "description": "The font size of the spinner, also set by the `--digit-font-size` custom property",
+              "name": "--spinner-font-size"
+            },
+            {
+              "description": "The padding of the spinner",
+              "name": "--spinner-padding"
+            },
+            {
+              "description": "The background color of the digit",
+              "name": "--digit-background"
+            },
+            {
+              "description": "The border radius of the digit",
+              "name": "--digit-border-radius"
+            },
+            {
+              "description": "The box shadow of the digit",
+              "name": "--digit-box-shadow"
+            },
+            {
+              "description": "The color of the digit",
+              "name": "--digit-color"
+            },
+            {
+              "description": "The font size of the digit, also set by the `--spinner-font-size` custom property",
+              "name": "--digit-font-size"
+            },
+            {
+              "description": "The spacing between digits",
+              "name": "--digit-spacing"
+            },
+            {
+              "description": "The text shadow of the digit, defaults to none",
+              "name": "--digit-text-shadow"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "The elements that represent an individual digit",
+              "name": "digit"
+            },
+            {
+              "description": "A wrapper element surrounding an individual digit",
+              "name": "digit-wrapper"
+            },
+            {
+              "description": "The element representing the first digit",
+              "name": "first-digit"
+            },
+            {
+              "description": "The wrapper element surrounding the first digit",
+              "name": "first-digit-wrapper"
+            },
+            {
+              "description": "The element representing the last digit",
+              "name": "last-digit"
+            },
+            {
+              "description": "The wrapper element surrounding the last digit",
+              "name": "last-digit-wrapper"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The numeric value displayed by the spinner.",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "Direction"
+              },
+              "default": "'forward'",
+              "description": "Determines whether digits animate \"forward” or \"backward\" or \"shortest\" path.",
+              "attribute": "direction"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "The duration of a single digit flip animation.",
+              "attribute": "duration"
+            },
+            {
+              "kind": "field",
+              "name": "easing",
+              "type": {
+                "text": "string"
+              },
+              "default": "'cubic-bezier(0.83, 0, 0.17, 1)'",
+              "description": "The easing function to use for the digit transition.",
+              "attribute": "easing"
+            },
+            {
+              "kind": "field",
+              "name": "minDigits",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Minimum number of digit slots to render (pads with leading zeros).\ne.g. if value=\"195\" and min-digits=\"5\", you get 0, 0, 1, 9, 5.",
+              "attribute": "min-digits"
+            },
+            {
+              "kind": "method",
+              "name": "increment",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "num",
+                  "default": "1",
+                  "description": "Number of digits to increment",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "Increment the spinner value by `num`"
+            },
+            {
+              "kind": "method",
+              "name": "decrement",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "num",
+                  "default": "1",
+                  "description": "Number of digits to decrement",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "Decrement the spinner value by `num`"
+            },
+            {
+              "kind": "method",
+              "name": "_getPartsByDigitIndex",
+              "privacy": "private",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "string[]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "digits",
+                  "type": {
+                    "text": "number[]"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "Fired when the digit flipping animation begins. The event has the following properties: * `from`: the digit value before the flip * `to`: the digit value after the flip",
+              "name": "digit-flip-start"
+            },
+            {
+              "description": "Fired when the digit flipping animation completes. The event has the following properties: * `from`: the digit value before the flip * `to`: the digit value after the flip",
+              "name": "digit-flip-end"
+            },
+            {
+              "description": "Fired when the digit wraps forward from 9 to 0, or backward from 0 to 9. The event has the following properties: * `from`: the digit value before the wrap * `to`: the digit value after the wrap * `direction`: the direction of the wrap",
+              "name": "digit-wrap"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The numeric value displayed by the spinner.",
+              "fieldName": "value"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "Direction"
+              },
+              "default": "'forward'",
+              "description": "Determines whether digits animate \"forward” or \"backward\" or \"shortest\" path.",
+              "fieldName": "direction"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "The duration of a single digit flip animation.",
+              "fieldName": "duration"
+            },
+            {
+              "name": "easing",
+              "type": {
+                "text": "string"
+              },
+              "default": "'cubic-bezier(0.83, 0, 0.17, 1)'",
+              "description": "The easing function to use for the digit transition.",
+              "fieldName": "easing"
+            },
+            {
+              "name": "min-digits",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Minimum number of digit slots to render (pads with leading zeros).\ne.g. if value=\"195\" and min-digits=\"5\", you get 0, 0, 1, 9, 5.",
+              "fieldName": "minDigits"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "digit-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DigitSpinner",
+          "declaration": {
+            "name": "DigitSpinner",
+            "module": "src/components/spinner/spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "digit-spinner",
+          "declaration": {
+            "name": "DigitSpinner",
+            "module": "src/components/spinner/spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/spinner/styles.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "styles",
+          "default": "css`\n  :host {\n    display: inline-block;\n    background: var(--spinner-background, rgba(14, 19, 23, 255));\n    border: var(--spinner-border-width, 0.25em) solid\n      var(--spinner-border-color, rgba(33, 39, 46, 255));\n    border-radius: var(--spinner-border-radius, 0.5rem);\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset;\n    font-family: var(\n      --spinner-font-family,\n      -apple-system,\n      BlinkMacSystemFont,\n      'Segoe UI',\n      Roboto,\n      Helvetica,\n      Arial,\n      sans-serif\n    );\n    font-size: var(--spinner-font-size, 3rem);\n    line-height: 1;\n    padding: var(--spinner-padding, calc(var(--spinner-font-size, 3rem) / 12));\n  }\n\n  .container {\n    display: inline-flex;\n    vertical-align: top;\n    gap: 0 var(--digit-spacing, 0.1em);\n  }\n`"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "styles",
+          "declaration": {
+            "name": "styles",
+            "module": "src/components/spinner/styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./components/digit/digit.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./components/spinner/spinner.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/digit-animation.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DigitAnimationEvent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "from",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "public",
+              "description": "what the digit was before this flip",
+              "default": "from"
+            },
+            {
+              "kind": "field",
+              "name": "to",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "public",
+              "description": "what the digit is after this flip",
+              "default": "to"
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "Exclude<Direction, 'shortest'> | undefined"
+              },
+              "privacy": "public",
+              "description": "the direction of the wrap",
+              "default": "direction"
+            }
+          ],
+          "superclass": {
+            "name": "Event",
+            "module": "src/events/digit-animation.ts"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DigitAnimationEvent",
+          "declaration": {
+            "name": "DigitAnimationEvent",
+            "module": "src/events/digit-animation.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "DigitAnimationEvent",
+            "module": "src/events/digit-animation.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

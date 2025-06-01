@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #333;
+  font-family: 'Open Sans', arial, sans-serif;
+  min-width: min-content;
+  min-height: 100vh;
+  font-size: 18px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: stretch; */
+}
+
+main {
+  display: block;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+a:visited {
+  color: inherit;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 280px;
+  margin: 0;
+  background: #3635ce;
+  /* background: linear-gradient(
+    0deg,
+    rgba(9, 9, 121, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  ); */
+  color: white;
+}
+
+footer {
+  width: 100%;
+  min-height: 120px;
+  background: #7630e1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px;
+  margin-top: 64px;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.6em;
+  font-weight: 300;
+  margin: 2rem 0 0.75rem;
+}
+
+h3 {
+  font-weight: 300;
+}
+
+header h1 {
+  width: auto;
+  font-size: 2.8em;
+  margin: 0;
+}
+
+header h2 {
+  width: auto;
+  margin: 0 2.5rem;
+}
+
+nav {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  grid-template-columns: repeat(auto-fit, 240px);
+  justify-content: center;
+  border-bottom: 1px solid #efefef;
+}
+
+nav > a {
+  color: #444;
+  display: block;
+  flex: 1;
+  font-size: 18px;
+  padding: 20px 0;
+  text-align: center;
+  text-decoration: none;
+}
+
+nav > a:hover {
+  text-decoration: underline;
+}
+
+.grid-layout {
+  display: grid;
+  margin: 0 auto;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 692px));
+  grid-template-rows: auto auto;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+  padding: 1rem;
+}
+
+.column {
+  padding: 1rem;
+}
+
+div.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.bg {
+  background: #efefef;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  font-weight: 600;
+}
+
+td,
+th {
+  border: solid 1px #aaa;
+  padding: 4px;
+  text-align: left;
+  vertical-align: top;
+}

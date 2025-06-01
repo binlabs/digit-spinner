@@ -1,0 +1,84 @@
+/* Playground styles */
+#playground-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0 1rem;
+}
+
+#playground-preview {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #f3f3f3;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+/* Code output area, bottom-left cell */
+#playground-code-output {
+  align-content: center;
+  grid-column: 1;
+  grid-row: 2;
+  padding: 1rem;
+  background-color: #f3f3f3;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 0.25rem 0.25rem;
+  overflow: auto;
+}
+
+#playground-code-output h2 {
+  margin: 0 0 0 1rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#playground-code-output pre {
+  margin: 0;
+}
+
+/* Controls area spanning both rows in the right column */
+#playground-controls {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+/* Control styles */
+#playground-controls .control,
+#playground-controls .control-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+#playground-controls .control:last-child {
+  margin-bottom: 0;
+}
+
+.control > *,
+.control-group > * {
+  display: block;
+  width: 100%;
+}
+
+.control label,
+.control-group__label {
+  margin-bottom: 0.5rem;
+}
+
+.control button,
+.control select {
+  font-size: 1.25rem;
+  padding: 0.25rem 1rem;
+}
