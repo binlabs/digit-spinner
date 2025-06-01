@@ -1,0 +1,359 @@
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><digit-spinner> ⌲ API Documentation</title>
+    <link rel="stylesheet" href="../docs.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto+Mono">
+    <link href="../prism-okaidia.css" rel="stylesheet" />
+    <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="/node_modules/lit/polyfill-support.js"></script>
+    <script type="module" src="../digit-spinner.bundled.js"></script>
+  </head>
+  <body>
+    
+<header>
+  <h1>&lt;digit-spinner></h1>
+  <h2>A digit spinning (e.g. odometer) web component built with Lit and TypeScript.</h2>
+</header>
+    
+<nav>
+  <a href="../">Home</a>
+  <a href="../examples/">Examples</a>
+  <a href="../playground/">Playground</a>
+  <a href="">API</a>
+  <a href="../install/">Install</a>
+</nav>
+    <div id="main-wrapper">
+      <main>
+        
+     <h1>API</h1>
+     
+       <h2>&lt;digit-spinner></h2>
+       <div>
+         A digit spinner web component. Displays a numeric value as a sequence of
+animated digit elements.
+       </div>
+       
+   <h3>Attributes</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th><th>Type</th><th>Default</th>
+     </tr>
+     
+       <tr>
+         <td>value</td><td>The numeric value displayed by the spinner.</td><td>number</td><td>0</td>
+       </tr>
+     
+       <tr>
+         <td>direction</td><td>Determines whether digits animate "forward” or "backward" or "shortest" path.</td><td>Direction</td><td>'forward'</td>
+       </tr>
+     
+       <tr>
+         <td>duration</td><td>The duration of a single digit flip animation.</td><td>number</td><td>200</td>
+       </tr>
+     
+       <tr>
+         <td>min-digits</td><td>Minimum number of digit slots to render (pads with leading zeros).
+e.g. if value="195" and min-digits="5", you get 0, 0, 1, 9, 5.</td><td>number</td><td>0</td>
+       </tr>
+     
+   </table>
+ 
+       
+   <h3>Properties</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Attribute</th><th>Description</th><th>Type</th><th>Default</th>
+     </tr>
+     
+       <tr>
+         <td>value</td><td>value</td><td>The numeric value displayed by the spinner.</td><td>number</td><td>0</td>
+       </tr>
+     
+       <tr>
+         <td>direction</td><td>direction</td><td>Determines whether digits animate "forward” or "backward" or "shortest" path.</td><td>Direction</td><td>'forward'</td>
+       </tr>
+     
+       <tr>
+         <td>duration</td><td>duration</td><td>The duration of a single digit flip animation.</td><td>number</td><td>200</td>
+       </tr>
+     
+       <tr>
+         <td>minDigits</td><td>min-digits</td><td>Minimum number of digit slots to render (pads with leading zeros).
+e.g. if value="195" and min-digits="5", you get 0, 0, 1, 9, 5.</td><td>number</td><td>0</td>
+       </tr>
+     
+   </table>
+   
+       
+   <h3>Methods</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Parameters</th><th>Description</th><th>Return</th>
+     </tr>
+     
+       <tr>
+         <td>increment</td><td>
+   
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th><th>Type</th>
+     </tr>
+     
+       <tr>
+         <td>num</td><td>Number of digits to increment</td><td>number</td>
+       </tr>
+     
+   </table>
+ </td><td>Increment the spinner value by `num`</td><td>void</td>
+       </tr>
+     
+       <tr>
+         <td>decrement</td><td>
+   
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th><th>Type</th>
+     </tr>
+     
+       <tr>
+         <td>num</td><td>Number of digits to decrement</td><td>number</td>
+       </tr>
+     
+   </table>
+ </td><td>Decrement the spinner value by `num`</td><td>void</td>
+       </tr>
+     
+   </table>
+ 
+           
+         
+       
+   <h3>CSS Shadow Parts</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th>
+     </tr>
+     
+       <tr>
+         <td>digit</td><td>The element representing a single digit</td>
+       </tr>
+     
+       <tr>
+         <td>digit-wrapper</td><td>A wrapper element surrounding an individual digit</td>
+       </tr>
+     
+       <tr>
+         <td>first-digit</td><td>The element representing the first digit</td>
+       </tr>
+     
+       <tr>
+         <td>first-digit-wrapper</td><td>The wrapper element for the first digit</td>
+       </tr>
+     
+       <tr>
+         <td>last-digit</td><td>The element representing the last digit</td>
+       </tr>
+     
+       <tr>
+         <td>last-digit-wrapper</td><td>The wrapper element for the last digit</td>
+       </tr>
+     
+   </table>
+ 
+       
+       
+       <h2>&lt;spinning-digit></h2>
+       <div>
+         A custom element that displays a single spinning digit. The digit can be
+animated to a new value. This element is intended for use in digit spinners,
+and is not intended for direct use.
+       </div>
+       
+   <h3>Attributes</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th><th>Type</th><th>Default</th>
+     </tr>
+     
+       <tr>
+         <td>value</td><td>The value of the digit. This value is updated immediately, and may not match
+the displayed value if the digit is animating.</td><td>number</td><td>0</td>
+       </tr>
+     
+       <tr>
+         <td>direction</td><td>The direction of the digit transition.
+
+* If `forward`, the digit value will increase (e.g. from 9 to 0) until the
+  target value is reached.
+* If `backward`, the digit value will decrease (e.g. from 0 to 9) until the
+  target value is reached.
+* If `shortest`, the digit value will take the shortest path
+  (either forward or backward) to the target value.</td><td>Direction</td><td>'forward'</td>
+       </tr>
+     
+       <tr>
+         <td>duration</td><td>The duration of the digit transition in milliseconds.</td><td>number</td><td>200</td>
+       </tr>
+     
+       <tr>
+         <td>easing</td><td>The easing function to use for the digit transition.</td><td>string</td><td>'cubic-bezier(0.83, 0, 0.17, 1)'</td>
+       </tr>
+     
+   </table>
+ 
+       
+   <h3>Properties</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Attribute</th><th>Description</th><th>Type</th><th>Default</th>
+     </tr>
+     
+       <tr>
+         <td>value</td><td>value</td><td>The value of the digit. This value is updated immediately, and may not match
+the displayed value if the digit is animating.</td><td>number</td><td>0</td>
+       </tr>
+     
+       <tr>
+         <td>direction</td><td>direction</td><td>The direction of the digit transition.
+
+* If `forward`, the digit value will increase (e.g. from 9 to 0) until the
+  target value is reached.
+* If `backward`, the digit value will decrease (e.g. from 0 to 9) until the
+  target value is reached.
+* If `shortest`, the digit value will take the shortest path
+  (either forward or backward) to the target value.</td><td>Direction</td><td>'forward'</td>
+       </tr>
+     
+       <tr>
+         <td>duration</td><td>duration</td><td>The duration of the digit transition in milliseconds.</td><td>number</td><td>200</td>
+       </tr>
+     
+       <tr>
+         <td>easing</td><td>easing</td><td>The easing function to use for the digit transition.</td><td>string</td><td>'cubic-bezier(0.83, 0, 0.17, 1)'</td>
+       </tr>
+     
+   </table>
+   
+       
+   <h3>Methods</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Parameters</th><th>Description</th><th>Return</th>
+     </tr>
+     
+       <tr>
+         <td>increment</td><td>
+   
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th><th>Type</th>
+     </tr>
+     
+       <tr>
+         <td>num</td><td>Number of digits to increment</td><td>number</td>
+       </tr>
+     
+   </table>
+ </td><td>Increment the digit value by `num`</td><td>void</td>
+       </tr>
+     
+       <tr>
+         <td>decrement</td><td>
+   
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th><th>Type</th>
+     </tr>
+     
+       <tr>
+         <td>num</td><td>Number of digits to decrement</td><td>number</td>
+       </tr>
+     
+   </table>
+ </td><td>Decrement the digit value by `num`</td><td>void</td>
+       </tr>
+     
+   </table>
+ 
+       
+   <h3>Events</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th>
+     </tr>
+     
+       <tr>
+         <td>digit-flip-start</td><td>fired when the digit flipping animation begins. The event's `detail` object has the following properties: * `from`: the digit value before the flip * `to`: the digit value after the flip</td>
+       </tr>
+     
+       <tr>
+         <td>digit-flip-end</td><td>fired when the digit flipping animation completes. The event's `detail` object has the following properties: * `from`: the digit value before the flip * `to`: the digit value after the flip</td>
+       </tr>
+     
+       <tr>
+         <td>digit-wrap</td><td>fired when the digit wraps forward from 9 to 0, or backward from 0 to 9. The event's `detail` object has the following properties: * `from`: the digit value before the wrap * `to`: the digit value after the wrap * `direction`: the direction of the wrap</td>
+       </tr>
+     
+   </table>
+     
+         
+       
+   <h3>CSS Shadow Parts</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th>
+     </tr>
+     
+       <tr>
+         <td>digit-wrapper</td><td>The wrapper element for the digits</td>
+       </tr>
+     
+       <tr>
+         <td>digit</td><td>The digit element</td>
+       </tr>
+     
+   </table>
+ 
+       
+   <h3>CSS Custom Properties</h3>
+   <table>
+     <tr>
+       <th>Name</th><th>Description</th>
+     </tr>
+     
+       <tr>
+         <td>--digit-font-size</td><td>The font size of the digit</td>
+       </tr>
+     
+       <tr>
+         <td>--digit-background-color</td><td>The background color of the digit</td>
+       </tr>
+     
+       <tr>
+         <td>--digit-color</td><td>The color of the digit</td>
+       </tr>
+     
+       <tr>
+         <td>--digit-font</td><td>The font stack of the digit</td>
+       </tr>
+     
+   </table>
+ 
+       
+   
+      </main>
+    </div>
+    
+<footer>
+  <p>
+    Made with
+    <a href="https://github.com/lit/lit-element-starter-ts">lit-starter-ts</a>
+  </p>
+</footer>
+  </body>
+</html>

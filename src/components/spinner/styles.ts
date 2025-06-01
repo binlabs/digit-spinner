@@ -1,0 +1,24 @@
+import {css} from 'lit';
+
+export const styles = css`
+  :host {
+    --spinner-font-size: 3rem;
+    --spinner-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Helvetica, Arial, sans-serif;
+    display: inline-block;
+    background-color: var(--spinner-background-color, rgba(14, 19, 23, 255));
+    border: var(--spinner-border-width, 0.25em) solid
+      var(--spinner-border-color, rgba(33, 39, 46, 255));
+    border-radius: var(--spinner-border-radius, 0.5rem);
+    font-family: var(--spinner-font);
+    font-size: var(--spinner-font-size);
+    line-height: 1;
+    padding: var(--spinner-padding, calc(var(--spinner-font-size) / 12));
+  }
+
+  .container {
+    display: inline-flex;
+    vertical-align: top;
+    gap: 0 var(--spinner-digit-spacing, 0.25rem);
+  }
+`;

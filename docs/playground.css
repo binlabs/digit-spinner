@@ -1,0 +1,64 @@
+/* Playground styles */
+/* Container: 2-column grid with a 2:1 width ratio */
+#playground-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+}
+
+/* Preview area, top-left cell */
+#playground-preview {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+}
+
+/* Code output area, bottom-left cell */
+#playground-code-output {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  overflow: auto;
+}
+
+/* Controls area spanning both rows in the right column */
+#playground-controls {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+/* Individual control items take full width and have spacing */
+#playground-controls .control,
+#playground-controls .control-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+#playground-controls .control:last-child {
+  margin-bottom: 0;
+}
+.control > *,
+.control-group > * {
+  display: block;
+  width: 100%;
+}
+.control label,
+.control-group__label {
+  margin-bottom: 0.5rem;
+}
