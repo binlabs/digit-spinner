@@ -96,3 +96,6 @@ dist
 
 # ignore test-results
 /test-results
+
+# ignore npm package directory
+/package

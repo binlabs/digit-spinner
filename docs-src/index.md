@@ -9,7 +9,7 @@ title: <digit-spinner> ⌲ Home
 
 ## Configure with attributes
 
-`<digit-spinner>` can be used in plain HTML - just set the `value` attribute to your desired value. It can be futher configured with other attributes, such as `min-digits` to prepend leading zeros. See the [attributes table](/api/#digit-spinner-attributes) for a full list of available attributes.
+`<digit-spinner>` can be used in plain HTML - just set the `value` attribute to your desired value. It can be futher configured with other attributes, such as `min-digits` to prepend leading zeros. See the [attributes table](api/#digit-spinner-attributes) for a full list of available attributes.
 
 ```html
 <digit-spinner value="42" min-digits="6"></digit-spinner>
@@ -27,7 +27,7 @@ title: <digit-spinner> ⌲ Home
 
 ## Easy theming
 
-Use CSS variables to easily change the styling of both the spinner (the wrapping element) and the digits it contains. See the [CSS custom properties table](/api/#digit-spinner-css-custom-properties) for a full list of available variables.
+Use CSS variables to easily change the styling of both the spinner (the wrapping element) and the digits it contains. See the [CSS custom properties table](api/#digit-spinner-css-custom-properties) for a full list of available variables.
 
 ```html
 <style>

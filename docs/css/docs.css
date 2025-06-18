@@ -33,24 +33,39 @@ header {
   height: 280px;
   margin: 0;
   background: #3635ce;
-  /* background: linear-gradient(
-    0deg,
-    rgba(9, 9, 121, 1) 0%,
-    rgba(0, 212, 255, 1) 100%
-  ); */
-  color: white;
+  background: linear-gradient(
+    180deg,
+    rgba(36, 51, 116, 1) 0%,
+    rgba(43, 67, 173, 1) 16.667%,
+    rgba(49, 86, 218, 1) 33.333%,
+    rgba(57, 107, 244, 1) 50%,
+    rgba(64, 127, 248, 1) 66.667%,
+    rgba(72, 146, 231, 1) 83.333%,
+    rgba(79, 162, 193, 1) 100%
+  );
+  color: #fff;
 }
 
 footer {
   width: 100%;
-  min-height: 120px;
-  background: #7630e1;
-  color: white;
+  min-height: 7.5rem;
+  background: rgba(72, 146, 231, 1);
+  color: #fff;
   display: flex;
+  font-size: 0.9rem;
   flex-direction: column;
   justify-content: center;
-  padding: 12px;
-  margin-top: 64px;
+  padding: 1rem 2rem;
+  margin-top: 4rem;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 h1 {
