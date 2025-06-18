@@ -1,6 +1,6 @@
 {
   "name": "digit-spinner",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A lightweight web component for odometer-style digit spinners and simple numeric counters.",
   "homepage": "https://github.com/binlabs/digit-spinner",
   "author": "Kurt Maine <develohost@gmail.com>",
